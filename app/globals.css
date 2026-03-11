@@ -127,8 +127,16 @@
   html {
     @apply font-sans;
   }
-  
+
   .hoverEffect {
     @apply transition-all duration-300 ease-in-out;
   }
+
+  /* for clerk styling */
+  .cl-button,
+  .cl-formButtonPrimary,
+  .cl-formFieldInput {
+    @apply rounded-4xl!;
+  }
+
 }
