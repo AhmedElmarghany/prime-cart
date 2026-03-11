@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Figtree } from "next/font/google";
 import { cn } from "@/lib/utils";
+import { ThemeProvider } from "@/components/providers/theme-provider"
 
-const figtree = Figtree({subsets:['latin'],variable:'--font-sans'});
+
+const figtree = Figtree({ subsets: ['latin'], variable: '--font-sans' });
 
 export const metadata: Metadata = {
   title: "Prime Cart",
@@ -16,11 +18,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    // <html lang="en" className={cn("font-sans dark", figtree.variable)}>
     <html lang="en" className={cn("font-sans ", figtree.variable)}>
       <body
         className={`antialiased`}
       >
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
