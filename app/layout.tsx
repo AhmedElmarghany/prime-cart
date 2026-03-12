@@ -4,7 +4,8 @@ import { Figtree } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/providers/theme-provider"
 import { ClerkProvider } from "@clerk/nextjs";
-import { shadcn } from '@clerk/ui/themes'
+import { shadcn } from '@clerk/ui/themes';
+import Header from "@/components/common/Header";
 
 
 
@@ -31,15 +32,17 @@ export default function RootLayout({
     >
       <html lang="en" className={cn("font-sans ", figtree.variable)}>
         <body
-          className={`antialiased`}
-        >
+          // className={`antialiased`}
+          className="flex flex-col min-h-screen antialiased"
+          >
           <ThemeProvider
             attribute="class"
             defaultTheme="system"
             enableSystem
             disableTransitionOnChange
           >
-            {children}
+          <Header />
+          <main className="flex-1">{children}</main>
           </ThemeProvider>
         </body>
       </html>

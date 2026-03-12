@@ -132,6 +132,10 @@
     @apply transition-all duration-300 ease-in-out;
   }
 
+  ::selection{
+    @apply bg-primary;
+  }
+  
   /* for clerk styling */
   .cl-button,
   .cl-formButtonPrimary,

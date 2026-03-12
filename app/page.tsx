@@ -1,14 +1,14 @@
 import { CardDemo } from "@/components/CardDemo"
 import Container from "@/components/common/Container";
-import Header from "@/components/common/Header";
 import Logo from "@/components/common/Logo";
+import HomeBanner from "@/components/HomeBanner";
 import { Button } from "@/components/ui/button"
 
 export default function Home() {
   return (
     <>
-    <Header />
     <Container>
+      <HomeBanner />
       <div className="w-1/2 bg-background">
         <h1>Hello</h1>
         <Logo />
