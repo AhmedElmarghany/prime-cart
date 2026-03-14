@@ -25,7 +25,7 @@ const SideMenu: FC<SidebarProps> = ({ isOpen, onClose }) => {
       >
         <div className="flex items-center justify-between gap-5">
           {/* logo */}
-          <h2 className="text-2xl text-background font-black tracking-wider uppercase hoverEffect group font-sans">
+          <h2 className="text-2xl text-primary-foreground font-black tracking-wider uppercase hoverEffect group font-sans">
             Prime {` `}
             <span
               className="font-bold hoverEffect lowercase">
@@ -35,7 +35,7 @@ const SideMenu: FC<SidebarProps> = ({ isOpen, onClose }) => {
           <button
             onClick={onClose}
           >
-            <RiCloseLargeFill className="text-foreground hover:text-background hover:cursor-pointer hoverEffect"/>
+            <RiCloseLargeFill className="text-foreground hover:text-background hover:cursor-pointer hoverEffect" />
           </button>
         </div>
 
@@ -51,7 +51,9 @@ const SideMenu: FC<SidebarProps> = ({ isOpen, onClose }) => {
             </Link>
           ))}
         </div>
-        <SocialMedia />
+        <SocialMedia
+          tooltipClassName="bg-foreground text-background"
+        />
       </div>
     </div>
   );
