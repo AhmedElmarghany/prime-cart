@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "typegen": "dotenv -e .env -- npx sanity schema extract && dotenv -e .env -- npx sanity typegen generate"
   },
   "dependencies": {
     "@clerk/nextjs": "^7.0.4",
@@ -16,6 +17,7 @@
     "@sanity/vision": "^4.22.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "dotenv-cli": "^11.0.0",
     "next": "16.1.6",
     "next-sanity": "^11.6.12",
     "next-themes": "^0.4.6",
@@ -24,6 +26,7 @@
     "react-dom": "19.2.3",
     "sanity": "^4.22.0",
     "shadcn": "^4.0.2",
+    "sonner": "^2.0.7",
     "styled-components": "^6.3.11",
     "swr": "^2.4.1",
     "tailwind-merge": "^3.5.0",

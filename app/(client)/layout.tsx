@@ -1,16 +1,13 @@
 import type { Metadata } from "next";
 import "../globals.css";
-// import { Figtree } from "next/font/google";
-import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/providers/theme-provider"
 import { ClerkProvider } from "@clerk/nextjs";
 import { shadcn } from '@clerk/ui/themes';
 import Header from "@/components/common/Header";
 import Footer from "@/components/common/Footer";
+import { Toaster } from "@/components/ui/sonner"
+import { TooltipProvider } from "@/components/ui/tooltip";
 
-
-
-// const figtree = Figtree({ subsets: ['latin'], variable: '--font-sans' });
 
 export const metadata: Metadata = {
   title: "Prime Cart",
@@ -31,20 +28,23 @@ export default function RootLayout({
         },
       }}
     >
-        <body
-          className="flex flex-col min-h-screen antialiased"
-          >
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-          <Header />
-          <main className="flex-1">{children}</main>
-          <Footer />
-          </ThemeProvider>
-        </body>
+      <body
+        className="flex flex-col min-h-screen antialiased"
+      >
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <TooltipProvider>
+            <Header />
+            <main className="flex-1">{children}</main>
+            <Footer />
+            <Toaster />
+          </TooltipProvider>
+        </ThemeProvider>
+      </body>
     </ClerkProvider>
   );
 }

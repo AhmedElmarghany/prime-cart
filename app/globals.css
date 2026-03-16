@@ -133,7 +133,7 @@
   }
 
   ::selection{
-    @apply bg-primary;
+    @apply bg-primary text-primary-foreground;
   }
   
   /* for clerk styling */
