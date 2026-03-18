@@ -5,7 +5,7 @@ import Link from "next/link";
 import { RiStarFill } from "@remixicon/react";
 import { RiFireFill } from "@remixicon/react";
 import PriceView from "./PriceView";
-import Title from "./Title";
+import Title from "../common/Title";
 import ProductSideMenu from "./ProductSideMenu";
 import AddToCartButton from "../buttons/AddToCartButton";
 
