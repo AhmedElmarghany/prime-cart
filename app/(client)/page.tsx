@@ -5,6 +5,7 @@ import { getCategories } from "@/sanity/queries";
 import HomeCategories from "@/components/home/HomeCategories";
 import ShopByBrands from "@/components/home/ShopByBrands";
 import CustomerServices from "@/components/home/CustomerServices";
+import LatestBlog from "@/components/home/LatestBlog";
 
 export default async function Home() {
   const categories = await getCategories(6);
@@ -17,6 +18,7 @@ export default async function Home() {
         <HomeCategories categories={categories} />
         <ShopByBrands />
         <CustomerServices />
+        <LatestBlog />
       </Container>
     </>
   );
