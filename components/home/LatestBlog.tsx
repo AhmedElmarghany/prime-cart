@@ -26,7 +26,7 @@ const LatestBlog = async () => {
                 />
               </Link>
             )}
-            <div className="bg-secondary p-5">
+            <div className="bg-card p-5">
               <div className="text-xs flex text-secondary-foreground items-center gap-5">
                 <div className="flex items-center relative group">
                   {blog?.blogcategories?.map((item, index) => (
@@ -46,7 +46,7 @@ const LatestBlog = async () => {
               </div>
               <Link
                 href={`/blog/${blog?.slug?.current}`}
-                className="text-base font-semibold tracking-wide mt-5 line-clamp-2 hover:text-primary hoverEffect"
+                className="text-base text-card-foreground font-semibold tracking-wide mt-5 line-clamp-2 hover:text-primary hoverEffect"
               >
                 {blog?.title}
               </Link>

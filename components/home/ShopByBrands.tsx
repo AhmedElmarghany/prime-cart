@@ -38,7 +38,7 @@ const ShopByBrands = async () => {
                 alt="brandImage"
                 width={250}
                 height={250}
-                className="w-32 h-20 object-contain"
+                className="w-32 h-20 object-contain scale-100 hover:scale-110 hoverEffect"
               />
             )}
           </Link>
