@@ -1,6 +1,6 @@
 import Container from "@/components/common/Container";
 import ProductGrid from "@/components/product/ProductGrid";
-import HomeBanner from "@/components/HomeBanner";
+// import HomeBanner from "@/components/HomeBanner";
 import { getCategories } from "@/sanity/queries";
 import HomeCategories from "@/components/home/HomeCategories";
 import ShopByBrands from "@/components/home/ShopByBrands";

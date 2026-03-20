@@ -143,4 +143,9 @@
     @apply rounded-4xl!;
   }
 
+  
+  @keyframes shimmer {
+    from { background-position: -200% center; }
+    to   { background-position:  200% center; }
+  }
 }
