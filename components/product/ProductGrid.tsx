@@ -33,11 +33,11 @@ const ProductGrid = () => {
     <Container className="flex flex-col lg:px-0 my-10">
       <HomeTabbar selectedTab={selectedTab} onTabSelect={setSelectedTab} />
       {isLoading &&
-        <div className="flex flex-col items-center justify-center py-10 min-h-80 space-y-4 text-center w-full mt-10">
-          <motion.div className="flex items-center space-x-2 text-foreground">
-            <RiLoaderLine className="w-5 h-5 animate-spin" />
-            <span>Products is loading...</span>
-          </motion.div>
+        <div className="flex flex-col items-center justify-center min-h-72 gap-3 rounded-2xl">
+          <div className="p-3 rounded-full bg-primary/10">
+            <RiLoaderLine className="w-5 h-5 animate-spin text-primary" />
+          </div>
+          <p className="text-sm text-muted-foreground">Loading products…</p>
         </div>
       }
       {products?.length ? (

@@ -18,4 +18,10 @@ const DEAL_PRODUCTS = defineQuery(
   }`
 );
 
-export { BRANDS_QUERY, LATEST_BLOG_QUERY, DEAL_PRODUCTS }
+const CATEGORY_PRODUCTS_QUERY = defineQuery(`*[_type == 'product' && references(*[_type == "category" && slug.current == $categorySlug]._id)] 
+| order(name asc){
+  ...,
+  "categories": categories[]->title
+}`);
+
+export { BRANDS_QUERY, LATEST_BLOG_QUERY, DEAL_PRODUCTS, CATEGORY_PRODUCTS_QUERY }
