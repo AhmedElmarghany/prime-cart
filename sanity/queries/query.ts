@@ -23,5 +23,13 @@ const CATEGORY_PRODUCTS_QUERY = defineQuery(`*[_type == 'product' && references(
   ...,
   "categories": categories[]->title
 }`);
+const PRODUCT_BY_SLUG_QUERY = defineQuery(
+  `*[_type == "product" && slug.current == $slug] | order(name asc) [0]`
+);
 
-export { BRANDS_QUERY, LATEST_BLOG_QUERY, DEAL_PRODUCTS, CATEGORY_PRODUCTS_QUERY }
+const BRAND_QUERY = defineQuery(`*[_type == "product" && slug.current == $slug]{
+  "brandName": brand->title
+  }`);
+
+
+export { BRANDS_QUERY, LATEST_BLOG_QUERY, DEAL_PRODUCTS, CATEGORY_PRODUCTS_QUERY, PRODUCT_BY_SLUG_QUERY, BRAND_QUERY }
