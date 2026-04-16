@@ -31,5 +31,16 @@ const BRAND_QUERY = defineQuery(`*[_type == "product" && slug.current == $slug]{
   "brandName": brand->title
   }`);
 
+const FILTERED_PRODUCTS_QUERY = defineQuery(`
+        *[_type == 'product'
+          && (!defined($selectedCategory) || references(*[_type == "category" && slug.current == $selectedCategory]._id))
+          && (!defined($selectedBrand) || references(*[_type == "brand" && slug.current == $selectedBrand]._id))
+          && price >= $minPrice && price <= $maxPrice
+        ]
+        | order(name asc) {
+          ...,"categories": categories[]->title
+        }
+      `);
 
-export { BRANDS_QUERY, LATEST_BLOG_QUERY, DEAL_PRODUCTS, CATEGORY_PRODUCTS_QUERY, PRODUCT_BY_SLUG_QUERY, BRAND_QUERY }
+
+export { BRANDS_QUERY, LATEST_BLOG_QUERY, DEAL_PRODUCTS, CATEGORY_PRODUCTS_QUERY, PRODUCT_BY_SLUG_QUERY, BRAND_QUERY, FILTERED_PRODUCTS_QUERY }

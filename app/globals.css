@@ -127,6 +127,10 @@
   html {
     @apply font-sans;
   }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
 
   .hoverEffect {
     @apply transition-all duration-300 ease-in-out;

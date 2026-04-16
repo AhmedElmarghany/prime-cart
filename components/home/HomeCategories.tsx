@@ -11,7 +11,8 @@ const HomeCategories = ({ categories }: { categories: Category[] }) => {
       <div className="mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {categories?.map((category) => (
           <Link
-            href={`/category/${category?.slug?.current}`}
+            // href={`/category/${category?.slug?.current}`}
+            href={{ pathname: "/shop", query: { category: category?.slug?.current } }}
             key={category?._id}
             className="hover:bg-popover p-5 flex items-center gap-3 rounded-xl group"
           >
