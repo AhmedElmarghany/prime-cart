@@ -42,5 +42,59 @@ const FILTERED_PRODUCTS_QUERY = defineQuery(`
         }
       `);
 
+const GET_ALL_BLOGS_QUERY = defineQuery(
+  `*[_type == 'blog'] | order(publishedAt desc)[0...$quantity]{
+  ...,  
+     blogcategories[]->{
+    title
+}
+    }
+  `
+);
 
-export { BRANDS_QUERY, LATEST_BLOG_QUERY, DEAL_PRODUCTS, CATEGORY_PRODUCTS_QUERY, PRODUCT_BY_SLUG_QUERY, BRAND_QUERY, FILTERED_PRODUCTS_QUERY }
+const SINGLE_BLOG_QUERY =
+  defineQuery(`*[_type == "blog" && slug.current == $slug][0]{
+  ..., 
+    author->{
+    name,
+    image,
+  },
+  blogcategories[]->{
+    title,
+    "slug": slug.current,
+  },
+}`);
+
+
+const OTHERS_BLOGS_QUERY = defineQuery(`*[
+  _type == "blog"
+  && defined(slug.current)
+  && slug.current != $slug
+]|order(publishedAt desc)[0...$quantity]{
+...
+  publishedAt,
+  title,
+  mainImage,
+  slug,
+  author->{
+    name,
+    image,
+  },
+  categories[]->{
+    title,
+    "slug": slug.current,
+  }
+}`);
+
+export {
+  BRANDS_QUERY,
+  LATEST_BLOG_QUERY,
+  DEAL_PRODUCTS,
+  CATEGORY_PRODUCTS_QUERY,
+  PRODUCT_BY_SLUG_QUERY,
+  BRAND_QUERY,
+  FILTERED_PRODUCTS_QUERY,
+  GET_ALL_BLOGS_QUERY,
+  SINGLE_BLOG_QUERY,
+  OTHERS_BLOGS_QUERY,
+};
