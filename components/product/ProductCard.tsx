@@ -6,7 +6,7 @@ import { RiStarFill } from "@remixicon/react";
 import { RiFireFill } from "@remixicon/react";
 import PriceView from "./PriceView";
 import Title from "../common/Title";
-import ProductSideMenu from "./ProductSideMenu";
+import ProductTopMenu from "./ProductTopMenu";
 import AddToCartButton from "../buttons/AddToCartButton";
 
 const ProductCard = ({ product }: { product: Product }) => {
@@ -26,7 +26,7 @@ const ProductCard = ({ product }: { product: Product }) => {
             />
           </Link>
         )}
-        <ProductSideMenu product={product} />
+        <ProductTopMenu product={product} />
         {product?.status === "sale" ? (
           <p className="absolute top-4 leading-4 left-2 z-10 text-xs border border-border px-2 rounded-full group-hover:text-primary group-hover:border-primary hoverEffect">
             SALE

@@ -1,6 +1,6 @@
 import AddToCartButton from "@/components/buttons/AddToCartButton";
 import Container from "@/components/common/Container";
-import FavoriteButton from "@/components/buttons/FavoriteButton";
+// import FavoriteButton from "@/components/buttons/FavoriteButton";
 import ImageView from "@/components/product/ImageView";
 import PriceView from "@/components/product/PriceView";
 import ProductCharacteristics from "@/components/product/ProductCharacteristics";
@@ -15,6 +15,7 @@ import {
 } from "@remixicon/react";
 import { notFound } from "next/navigation";
 import { ProductDetails } from "@/components/product/ProductDetails";
+import AddToFavourite from "@/components/buttons/AddToFavourite";
 
 const SingleProductPage = async ({
   params,
@@ -81,7 +82,8 @@ const SingleProductPage = async ({
             <div className="flex-1">
               <AddToCartButton product={product} />
             </div>
-            <FavoriteButton />
+            {/* <FavoriteButton /> */}
+            <AddToFavourite product={product}/>
           </div>
 
           {/* Characteristics accordion */}

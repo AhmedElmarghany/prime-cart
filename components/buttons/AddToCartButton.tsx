@@ -5,6 +5,7 @@ import { RiShoppingBag3Line as ShoppingBag } from "@remixicon/react";
 import PriceFormatter from "@/components/product/PriceFormatter";
 import QuantityButtons from "./QuantityButtons";
 import { toast } from "sonner";
+import useStore from "@/store";
 
 interface Props {
   product: Product;
@@ -12,17 +13,24 @@ interface Props {
 }
 
 const AddToCartButton = ({ product }: Props) => {
+  const { addItem, getItemCount } = useStore();
+  const itemCount = getItemCount(product?._id);
+  const isOutOfStock = product?.stock === 0;
+
 
   const handleAddToCart = () => {
-    // Add Logic here
-    toast.success(
-      `${product?.name?.substring(0, 12)}... added successfully!`
-    );
+    if ((product?.stock as number) > itemCount) {
+      addItem(product);
+      toast.success(
+        `${product?.name?.substring(0, 12)}... added successfully!`
+      );
+    } else {
+      toast.error("Can not add more than available stock");
+    }
   };
   return (
     <div className="w-full h-12 flex items-center">
-      {/* Add Logic here */}
-      {false ? (
+      {itemCount ? (
         <div className="text-sm w-full">
           <div className="flex items-center justify-between">
             <span className="text-xs text-foreground">Quantity</span>
@@ -31,20 +39,17 @@ const AddToCartButton = ({ product }: Props) => {
           <div className="flex items-center justify-between border-t pt-1">
             <span className="text-xs font-semibold">Subtotal</span>
             <PriceFormatter
-              // Add Logic here
-              amount={526}
+              amount={product?.price ? product?.price * itemCount : 0}
             />
           </div>
         </div>
       ) : (
         <Button
           onClick={handleAddToCart}
-          // Add Logic here
-          // disabled={isOutOfStock}
+          disabled={isOutOfStock}
           className="w-full hoverEffect"
         >
-          {/* Add Logic here */}
-          <ShoppingBag /> {"Add to Cart"}
+          <ShoppingBag /> {isOutOfStock ? "Out of Stock" : "Add to Cart"}
         </Button>
       )}
     </div>
