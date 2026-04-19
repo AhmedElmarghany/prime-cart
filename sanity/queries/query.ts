@@ -86,6 +86,7 @@ const OTHERS_BLOGS_QUERY = defineQuery(`*[
   }
 }`);
 
+const ADDRESSES_QUERY = `*[_type=="address"] | order(publishedAt desc)`;
 export {
   BRANDS_QUERY,
   LATEST_BLOG_QUERY,
@@ -97,4 +98,5 @@ export {
   GET_ALL_BLOGS_QUERY,
   SINGLE_BLOG_QUERY,
   OTHERS_BLOGS_QUERY,
+  ADDRESSES_QUERY
 };
