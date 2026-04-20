@@ -1,14 +1,25 @@
+"use client"
 import Title from "@/components/common/Title";
 import Link from "next/link";
-import { getAllBrands } from "@/sanity/queries";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
 import { Brand } from "@/sanity.types";
 import { Button } from "../ui/button";
+import useSWR from "swr";
+import { client } from "@/sanity/lib/client";
+import { BRANDS_QUERY } from "@/sanity/queries/query";
+import { Skeleton } from "../ui/skeleton";
+
+const fetchBrands = () => client.fetch(BRANDS_QUERY);
 
 
-const ShopByBrands = async () => {
-  const brands = await getAllBrands();
+
+const ShopByBrands = () => {
+  const { data: brands, isLoading } = useSWR(
+    "brands",
+    fetchBrands
+  );
+
   return (
     <div className="mb-10 py-5 lg:py-6">
       <div className="flex items-center gap-5 justify-between mb-10">
@@ -26,6 +37,14 @@ const ShopByBrands = async () => {
 
       </div>
       <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 justify-items-center gap-2.5">
+        {isLoading &&
+          <>
+            {Array.from({ length: 8 }).map((_, index) => (
+              <Skeleton key={index} className="w-34 h-24  rounded-xl"/>
+            ))}
+          </>
+        }
+
         {brands?.map((brand: Brand) => (
           <Link
             key={brand?._id}

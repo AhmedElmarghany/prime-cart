@@ -50,7 +50,9 @@ const ProductCard = ({ product }: { product: Product }) => {
             {product.categories.map((cat) => cat).join(", ")}
           </p>
         )}
+        <Link href={`/product/${product?.slug?.current}`}>
         <Title className="text-sm line-clamp-1">{product?.name}</Title>
+        </Link>
         <div className="flex items-center gap-2">
           <div className="flex items-center">
             {[...Array(5)].map((_, index) => (

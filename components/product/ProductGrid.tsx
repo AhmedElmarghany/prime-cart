@@ -6,11 +6,11 @@ import HomeTabbar from "../home/HomeTabbar";
 import { productType } from "@/constants/data";
 import { client } from "@/sanity/lib/client";
 import { motion, AnimatePresence } from "motion/react";
-import { RiLoaderLine } from "@remixicon/react";
 import useSWR from "swr";
 import NoProductAvailable from "./NoProductAvailable";
 import { Product } from "@/sanity.types";
 import ProductCard from "./ProductCard";
+import ProductCardSkeleton from "../skeletons/ProductCardSkeleton";
 
 const query = `*[_type == "product" && variant == $variant] | order(name asc){
   ...,"categories": categories[]->title
@@ -28,21 +28,21 @@ const ProductGrid = () => {
   );
 
 
-
   return (
     <Container className="flex flex-col lg:px-0 my-10">
       <HomeTabbar selectedTab={selectedTab} onTabSelect={setSelectedTab} />
       {isLoading &&
-        <div className="flex flex-col items-center justify-center min-h-72 gap-3 rounded-2xl">
-          <div className="p-3 rounded-full bg-primary/10">
-            <RiLoaderLine className="w-5 h-5 animate-spin text-primary" />
+        <>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2.5 mt-10">
+            {Array.from({ length: 10 }).map((_, index) => (
+              <ProductCardSkeleton key={index} />
+            ))}
           </div>
-          <p className="text-sm text-muted-foreground">Loading products…</p>
-        </div>
+        </>
       }
-      {products?.length ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2.5 mt-10">
-          <>
+      {!isLoading && products?.length ? (
+        <>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2.5 mt-10">
             {products?.map((product: Product) => (
               <AnimatePresence key={product?._id}>
                 <motion.div
@@ -55,12 +55,12 @@ const ProductGrid = () => {
                 </motion.div>
               </AnimatePresence>
             ))}
-          </>
-        </div>) : (
+          </div>
+        </>
+      ) : (
         <NoProductAvailable selectedTab={selectedTab} />
       )
       }
-      {/* <NoProductAvailable selectedTab={selectedTab} /> */}
     </Container>
   );
 };

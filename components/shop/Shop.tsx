@@ -1,23 +1,39 @@
 "use client";
 
-import { BRANDS_QUERYResult, Category, Product } from "@/sanity.types";
+import { Product } from "@/sanity.types";
 import { useState } from "react";
 import Container from "@/components/common/Container";
 import { useSearchParams } from "next/navigation";
 import { client } from "@/sanity/lib/client";
 import NoProductAvailable from "@/components/product/NoProductAvailable";
 import ProductCard from "@/components/product/ProductCard";
-import { RiLoaderLine, RiEqualizerLine, RiCloseLine } from "@remixicon/react";
-import { FILTERED_PRODUCTS_QUERY } from "@/sanity/queries/query";
+import { RiEqualizerLine, RiCloseLine } from "@remixicon/react";
+import { BRANDS_QUERY, CATEGORIES_QUERY, FILTERED_PRODUCTS_QUERY } from "@/sanity/queries/query";
 import { SidebarContent } from "./SidebarFilter";
 import useSWR from "swr";
+import ProductCardSkeleton from "../skeletons/ProductCardSkeleton";
 
-interface Props {
-  categories: Category[];
-  brands: BRANDS_QUERYResult;
-}
 
-const Shop = ({ categories, brands }: Props) => {
+
+const getCategories = (quantity: number) => {
+  return client.fetch(CATEGORIES_QUERY, { quantity });
+};
+const fetchBrands = () => client.fetch(BRANDS_QUERY);
+
+
+const Shop = () => {
+
+  const { data: categories } = useSWR(
+    ["categories", 6],
+    ([_, quantity]) => getCategories(quantity)
+  );
+  const { data: brands } = useSWR(
+    "brands",
+    fetchBrands
+  );
+
+
+
   const searchParams = useSearchParams();
   const brandParams = searchParams?.get("brand");
   const categoryParams = searchParams?.get("category");
@@ -207,11 +223,10 @@ const Shop = ({ categories, brands }: Props) => {
             )}
 
             {isLoading ? (
-              <div className="flex flex-col items-center justify-center min-h-80 gap-3 rounded-2xl border border-dashed border-border bg-muted/20">
-                <div className="p-3 rounded-full bg-primary/10">
-                  <RiLoaderLine className="w-5 h-5 animate-spin text-primary" />
-                </div>
-                <p className="text-sm text-muted-foreground">Loading products…</p>
+              <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-3">
+                {Array.from({ length: 10 }).map((_, index) => (
+                  <ProductCardSkeleton key={index} />
+                ))}
               </div>
             ) : products?.length > 0 ? (
               <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-3">

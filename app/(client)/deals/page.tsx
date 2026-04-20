@@ -1,11 +1,23 @@
+"use client"
 import Container from "@/components/common/Container";
 import ProductCard from "@/components/product/ProductCard";
-import { getDealProducts } from "@/sanity/queries";
 import { Product } from "@/sanity.types";
 import { RiFireFill } from "@remixicon/react";
+import ProductCardSkeleton from "@/components/skeletons/ProductCardSkeleton";
+import { client } from "@/sanity/lib/client";
+import { DEAL_PRODUCTS } from "@/sanity/queries/query";
+import useSWR from "swr";
 
-const DealPage = async () => {
-  const products = await getDealProducts();
+
+const fetchDealProducts = () => client.fetch(DEAL_PRODUCTS);
+
+
+const DealPage = () => {
+    const { data: products, isLoading } = useSWR(
+    "deals",
+    fetchDealProducts
+  );
+
   return (
     <div className="pt-6 pb-12">
       <Container>
@@ -36,6 +48,14 @@ const DealPage = async () => {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2.5">
+          {isLoading && (
+            <>
+              {Array.from({ length: 10 }).map((_, index) => (
+                <ProductCardSkeleton key={index} />
+              ))}
+            </>
+
+          )}
           {products?.map((product: Product) => (
             <ProductCard key={product?._id} product={product} />
           ))}

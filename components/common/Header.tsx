@@ -20,7 +20,7 @@ const Header = async () => {
         </div>
         <HeaderLinks />
         <div className="w-auto md:w-1/3 flex items-center justify-end gap-5">
-          <SearchButton />
+          {/* <SearchButton /> */}
           <CartButton />
           <FavoriteButton />
           <ModeToggle />
